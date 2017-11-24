@@ -33,3 +33,14 @@
 		[(null-ld? listdiff) (display "error\n")]
 		[else (car (car listdiff))]
 		))
+
+; Return a listdiff containing all but the first element of listdiff. It is an
+; error if listdiff has no elements.
+(define (cdr-ld listdiff)
+	(cond
+		; Error if not a listdiff
+		[(not (listdiff? listdiff)) (display "error\n")]
+		; Error if empty listdiff
+		[(null-ld? listdiff) (display "error\n")]
+		[else (cons (cdr (car listdiff)) (cdr listdiff))]
+		))
