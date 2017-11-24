@@ -22,3 +22,14 @@
 (define (cons-ld obj listdiff)
 	(cons (cons obj (car listdiff)) (cdr listdiff)
 		))
+
+; Return the first element of listdiff. It is an error if listdiff has no
+; elements.
+(define (car-ld listdiff)
+	(cond
+		; Error if not a listdiff
+		[(not (listdiff? listdiff)) (display "error\n")]
+		; Error if empty listdiff
+		[(null-ld? listdiff) (display "error\n")]
+		[else (car (car listdiff))]
+		))
