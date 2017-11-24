@@ -1,4 +1,10 @@
-; Return #t if obj is a listdiff, #f otherwise
+; Return #t if obj is an empty listdiff, #f otherwise.
+(define (null-ld? obj)
+	; An empty listdiff must be a listdiff and its car must be eq? to its cdr
+	(and (listdiff? obj) (eq? (car obj) (cdr obj)))
+	)
+
+; Return #t if obj is a listdiff, #f otherwise.
 (define (listdiff? obj)
 	(cond
 		; A listdiff is a pair
@@ -10,8 +16,9 @@
 		[else (listdiff? (cons (cdr (car obj)) (cdr obj)))]
 		))
 
-; Return #t if obj is an empty listdiff, #f otherwise
-(define (null-ld? obj)
-	; An empty listdiff must be a listdiff and its car must be eq? to its cdr
-	(and (listdiff? obj) (eq? (car obj) (cdr obj)))
-	)
+; Return a listdiff whose first element is obj and whose remaining elements are
+; listdiff. The last argument cannot be an arbitrary object; it must be a
+; listdiff.
+(define (cons-ld obj listdiff)
+	(cons (cons obj (car listdiff)) (cdr listdiff)
+		))
