@@ -101,7 +101,7 @@
 		[(= k 0) listdiff]
 		; Error when k is greater than listdiff length
 		[(< (length-ld listdiff) k) (display "error\n")]
-		[else (cons (car-ld listdiff) (list-tail-ld (cdr-ld listdiff) (- k 1)))]
+		[else (list-tail-ld (cdr-ld listdiff) (- k 1))]
 		))
 
 ; Return a listdiff that represents the same elements as list.
