@@ -75,7 +75,7 @@
 ; newly allocated, except that it shares structure with the last argument.
 (define (append-ld . listdiff)
 	(cond
-		[(= (length listdiff) 1)
+		[(= (length (cdr listdiff)) 1)
 			(cons
 				(append
 					(listdiff->list (car listdiff))
@@ -85,7 +85,7 @@
 			(append-ld
 				(cons
 					(append
-						(listdiff->list listdiff)
+						(listdiff->list (car listdiff))
 						(car (car (cdr listdiff))))
 					(cdr (car (cdr listdiff))))
 				(car (cdr (cdr listdiff))))]
