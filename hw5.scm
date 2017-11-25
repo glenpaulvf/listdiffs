@@ -54,3 +54,18 @@
 				car-obj)
 			car-obj)
 		))
+
+; Return the length of listdiff.
+(define (length-ld listdiff)
+	(cond
+		; Error if not a listdiff
+		[(not (listdiff? listdiff)) (display "error\n")]
+		; 0 if empty listdiff
+		[(null-ld? listdiff) 0]
+		; Count
+		[else
+			(let length-ld-count ([listdiff listdiff] [count 0])
+				(cond
+					[(eq? (car listdiff) (cdr listdiff)) count]
+					[else (length-ld-count (cdr-ld listdiff) (+ count 1))]))]
+		))
