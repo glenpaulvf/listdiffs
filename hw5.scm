@@ -44,3 +44,13 @@
 		[(null-ld? listdiff) (display "error\n")]
 		[else (cons (cdr (car listdiff)) (cdr listdiff))]
 		))
+
+; Return a newly allocated listdiff of its arguments.
+(define (listdiff . obj)
+	(let ((car-obj (list (car obj)))) ; Ensure same object
+		(cons 
+			(append
+				(cons (car obj) (cdr obj))
+				car-obj)
+			car-obj)
+		))
