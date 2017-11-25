@@ -74,8 +74,11 @@
 ; return listdiff. It is an error if k exceeds the length of listdiff.
 (define (list-tail-ld listdiff k)
 	(cond
+		; Error when k is less than 0
 		[(< k 0) (display "error\n")]
+		; Listdiff when k is 0
 		[(= k 0) listdiff]
+		; Error when k is greater than listdiff length
 		[(< (length-ld listdiff) k) (display "error\n")]
 		[else (cons (car-ld listdiff) (list-tail-ld (cdr-ld listdiff) (- k 1)))]
 		))
@@ -86,3 +89,17 @@
 		(list (append list (list (car list))))
 		(list (car list))
 		))
+
+; Return a list that represents the same elements as listdiff.
+(define (listdiff->list listdiff)
+	(cond
+		; Error if not a listdiff
+		[(not (listdiff? listdiff)) (display "error\n")]
+		; Count
+		[else
+			(let ld->l ([listdiff listdiff] [l '()])
+				(cond
+					[(eq? (car listdiff) (cdr listdiff)) l]
+					[else (ld->l (cdr-ld listdiff) (append l (list (car (car listdiff)))))]))]
+		))
+
