@@ -124,3 +124,17 @@
 					[else (ld->l (cdr-ld listdiff) (append l (list (car (car listdiff)))))]))]
 		))
 
+; Return a Scheme expression that, when evaluated, will return a copy of
+; listdiff, that is, a listdiff that has the same top-level data structure as
+; listdiff. Assume that the argument listdiff contains only booleans,
+; characters, numbers, and symbols.
+(define (expr-returning listdiff)
+	(let ((left (listdiff->list listdiff))
+			(right (cdr listdiff)))
+		`(let ((right '(unquote right)))
+			(cons
+				(append
+					'(unquote left)
+					right)
+				right))
+		))
