@@ -79,3 +79,10 @@
 		[(< (length-ld listdiff) k) (display "error\n")]
 		[else (cons (car-ld listdiff) (list-tail-ld (cdr-ld listdiff) (- k 1)))]
 		))
+
+; Return a listdiff that represents the same elements as list.
+(define (list->listdiff list)
+	(append
+		(list (append list (list (car list))))
+		(list (car list))
+		))
