@@ -69,3 +69,13 @@
 					[(eq? (car listdiff) (cdr listdiff)) count]
 					[else (length-ld-count (cdr-ld listdiff) (+ count 1))]))]
 		))
+
+; Return listdiff, except with the first k elements omitted. If k is zero,
+; return listdiff. It is an error if k exceeds the length of listdiff.
+(define (list-tail-ld listdiff k)
+	(cond
+		[(< k 0) (display "error\n")]
+		[(= k 0) listdiff]
+		[(< (length-ld listdiff) k) (display "error\n")]
+		[else (cons (car-ld listdiff) (list-tail-ld (cdr-ld listdiff) (- k 1)))]
+		))
