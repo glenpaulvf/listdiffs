@@ -70,6 +70,27 @@
 					[else (length-ld-count (cdr-ld listdiff) (+ count 1))]))]
 		))
 
+; Return a listdiff consisting of the elements of the first listdiff followed
+; by the elements of the other listdiffs. The resulting listdiff is always
+; newly allocated, except that it shares structure with the last argument.
+(define (append-ld . listdiff)
+	(cond
+		[(= (length listdiff) 1)
+			(cons
+				(append
+					(listdiff->list (car listdiff))
+					(car (car (cdr listdiff))))
+				(cdr (car (cdr listdiff))))]
+		[else
+			(append-ld
+				(cons
+					(append
+						(listdiff->list listdiff)
+						(car (car (cdr listdiff))))
+					(cdr (car (cdr listdiff))))
+				(car (cdr (cdr listdiff))))]
+		))
+
 ; Return listdiff, except with the first k elements omitted. If k is zero,
 ; return listdiff. It is an error if k exceeds the length of listdiff.
 (define (list-tail-ld listdiff k)
